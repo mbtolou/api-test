@@ -1,0 +1,28 @@
+
+Number of requests in 60s:
+apistar 36173
+bottle 41337
+falcon 30818
+flask 23423
+hug 31067
+
+Number of requests in 60s:
+apistar 58060
+bottle 51568
+falcon 58279
+flask 49305
+hug 25071
+
+Number of requests in 60s:
+apistar 58254
+bottle 50772
+falcon 46708
+flask 25277
+hug 48689
+
+Number of requests in 3600s:
+apistar 3546910
+bottle 3991002
+falcon 4087315
+flask 2364694
+hug 3012061
