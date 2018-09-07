@@ -1,3 +1,11 @@
+apistar :    58254 requests in   60s
+bottle  :    50772 requests in   60s
+falcon  :    46708 requests in   60s
+flask   :    25277 requests in   60s
+hug     :    48689 requests in   60s
+pyramid :    51101 requests in   60s
+sanic   :   143127 requests in   60s
+
 apistar :   659783 requests in  600s
 bottle  :   584356 requests in  600s
 falcon  :   606565 requests in  600s
@@ -5,6 +13,3 @@ flask   :   367817 requests in  600s
 hug     :   498142 requests in  600s
 pyramid :   557527 requests in  600s
 sanic   :  1766532 requests in  600s
-apistar :    49552 requests in   60s
-sanic   :   143127 requests in   60s
-
