@@ -6,25 +6,25 @@ This document is intended as a comparison between several Python and Go framewor
 
 * **Python:** There are plenty of Web frameworks to choose from, and most of them are comparable in performance. Flask is the least performant in a benchmark, but compensates with a big community and a lot of extension options. Many frameworks come with tools to help write an OpenAPI spec that can be used to generate Swagger documentation.
 
-* **Go:** Go already comes with a net/http package that can handle requests. An external framework is not mandatory to write an API in Go, but it makes one's life easier. Go being younger than Python, there are less options and there is no clear winner regarding which is the best. What we need is a router; Gorilla/mux and Gin are the most widely used.
+* **Go:** Go already comes with a net/http package that can handle requests. An external framework is not mandatory to write an API in Go, but it makes one's life easier. Go being younger than Python, there are less options and there are no clear winners regarding which are the best. What we need is a router; Gorilla/mux and Gin are the most widely used.
 
 ## A summary
 
 | Framework                 | Language               | Pros                                                                                               | Cons                                                                                                                                       |
 |------------------|----------------|----------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | Flask            | Python 2 and 3 | Popularity, flexible with extension options, well documented                                       | Performance, not async-friendly                                                                                                            |
-| Django           | Python 3       | Popularity, customizable, ORM support, complex routing, well documented                            | Heavy (fullstack not needed), performance, not async-friendly, learning curve                                                              |
-| Bottle           | Python 2 and 3 | Popularity, performance, simplicity, no dependencies, complex routing, well documented             | One-file approach (only good for microservices), not async-friendly (but possible [using gevent](http://bottlepy.org/docs/dev/async.html)) |
+| Django           | Python 3       | Popularity, customizable, ORM support, complex routing*, well documented                            | Heavy (fullstack not needed), performance, not async-friendly, learning curve                                                              |
+| Bottle           | Python 2 and 3 | Popularity, performance, simplicity, no dependencies, complex routing*, well documented             | One-file approach (only good for microservices), not async-friendly (but possible [using gevent](http://bottlepy.org/docs/dev/async.html)) |
 | hug              | Python 3       | Popularity, performance, simplicity                                                                | No Swagger tool (but an auto documentation feature), not async-friendly, not very well documented                                          |
-| Pyramid          | Python 2 and 3 | Simplicity, performance, complex routing                                                           | not async-friendly                                                                                                                         |
+| Pyramid          | Python 2 and 3 | Simplicity, performance, complex routing*                                                           | not async-friendly                                                                                                                         |
 | API Star         | Python 3       | Performance, well documented                                                                       | Popularity, no Swagger tool (but an auto documentation feature), not async-friendly                                                        |
 | Falcon           | Python 2 and 3 | Performance, lightweight, works with async libraries, well documented                              |                                                                                                                                            |
 | Quart            | Python 3       | Async, simple evolution from Flask apps, faster than Flask                                         | Not as fast as others, does not support all Flask extensions                                                                               |
-| Sanic            | Python 3       | Async, fast, complex routing, well documented                                                      |                                                                                                                                            |
-| Tornado          | Python 2 and 3 | Async, fast, complex routing                                                                       | Heavy (fullstack not needed)                                                                                                               |
+| Sanic            | Python 3       | Async, fast, complex routing*, well documented                                                      |                                                                                                                                            |
+| Tornado          | Python 2 and 3 | Async, fast, complex routing*                                                                       | Heavy (fullstack not needed)                                                                                                               |
 | Standard library | Go             | No external dependencies                                                                           | Tedious                                                                                                                                    |
 | Revel            | Go             | Popularity, strong community, well documented                                                      | Heavy (fullstack not needed)                                                                                                               |
-| Gorilla/mux      | Go             | Popularity, simple, complex routing                                                                |                                                                                                                                            |
+| Gorilla/mux      | Go             | Popularity, simple, complex routing*                                                                |                                                                                                                                            |
 | Gin              | Go             | Popularity, minimalist, [route grouping feature](https://github.com/gin-gonic/gin#grouping-routes) |                                                                                                                                            |
 | Echo             | Go             | Popularity, minimalist, well documented                                                            | Many dependencies                                                                                                                          |
 | chi              | Go             | Lightweight, no external dependencies                                                              | Not very well documented                                                                                                                   |
@@ -37,32 +37,32 @@ This document is intended as a comparison between several Python and Go framewor
 ### Python frameworks
 
 * Tested:
-  * API Star (not popular enough?) - Python 3+
-  * Bottle (non full stack framework. one-file approach: good for small projects) - Python 2.7 and 3.2+
-  * Falcon (non full stack framework. made to build REST APIs) - Python 2 and 3.3+
-  * Flask (non full stack framework) - Python 2 and 3.3+
-  * hug (non full stack framework. built on-top of Falcon) - Python 3+
-  * Pyramid (non full stack framework. not popular enough?) - Python 2 and 3.3+
-  * Quart: Flask with asyncio (non full stack framework. Flask apps can easily evolve into Quart apps. async only -> no WSGI) - Python 3.6+
-  * Sanic: async (non full stack framework. [architectural issues](https://github.com/channelcat/sanic/issues/1176)?) - Python 3.5+
-  * Tornado (mostly async) - Python 2 and 3
+  * [API Star](https://docs.apistar.com/) (not popular enough?) - Python 3+
+  * [Bottle](https://bottlepy.org/) (non full stack framework. one-file approach: good for small projects) - Python 2.7 and 3.2+
+  * [Falcon](https://falconframework.org/) (non full stack framework. made to build REST APIs) - Python 2 and 3.3+
+  * [Flask](http://flask.pocoo.org/) (non full stack framework) - Python 2 and 3.3+
+  * [hug](http://www.hug.rest/) (non full stack framework. built on-top of Falcon) - Python 3+
+  * [Pyramid](https://trypyramid.com/) (non full stack framework. not popular enough?) - Python 2 and 3.3+
+  * [Quart](https://pgjones.gitlab.io/quart/): Flask with asyncio (non full stack framework. Flask apps can easily evolve into Quart apps. async only -> no WSGI) - Python 3.6+
+  * [Sanic](https://sanic.readthedocs.io/): async (non full stack framework. [architectural issues](https://github.com/channelcat/sanic/issues/1176)?) - Python 3.5+
+  * [Tornado](http://www.tornadoweb.org/) (mostly async) - Python 2 and 3
 
 * Eliminated:
-  * Django with the Django REST Framework (too heavy. high level, not super performant but has orm)
-  * Japronto (early preview only. also, did not work)
-  * Pycnic (non full stack framework. JSON-API-only)
-  * Sandman (no code, admin page)
-  * [Vibora](https://github.com/vibora-io/vibora) (async. still in Alpha at this time, but looks like it will be awesome!)
-  * wheezy.web (full stack framework. version 0.1: too young? also, did not work)
+  * [Django](https://www.djangoproject.com/) with the [Django REST Framework](http://www.django-rest-framework.org/) (too heavy. high level, not super performant but has orm)
+  * [Japronto](https://github.com/squeaky-pl/japronto) (early preview only. also, did not work well in my tests)
+  * [Pycnic](http://pycnic.nullism.com/) (non full stack framework. JSON-API-only)
+  * [Sandman 2](https://github.com/jeffknupp/sandman2) (create an API service from an existing database)
+  * [Vibora](https://vibora.io/) (async. still in Alpha at this time, but looks like it will be awesome!)
+  * [wheezy.web](https://bitbucket.org/akorn/wheezy.web) (full stack framework. version 0.1: too young? also, did not work well in my tests)
 
 * Not tested:
-  * AIOHTTP (mostly async)
-  * CherryPy (non full stack framework. did not work)
-  * Cornice (REST framework for Pyramid)
-  * Eve (REST framework built with Flask and MongoDB -> same performance as Flask)
-  * Morepath (not popular enough?)
-  * Muffin (not popular enough?)
-  * weppy (not popular enough?)
+  * [AIOHTTP](https://aiohttp.readthedocs.io/) (mostly async)
+  * [CherryPy](https://cherrypy.org/) (non full stack framework. did not work well in my tests)
+  * [Cornice](https://cornice.readthedocs.io/) (REST framework for Pyramid)
+  * [Eve](http://python-eve.org/) (REST framework built with Flask and MongoDB -> same performance as Flask)
+  * [Morepath](https://morepath.readthedocs.io/) (not popular enough?)
+  * [Muffin](https://muffin.readthedocs.io/) (not popular enough?)
+  * [weppy](http://weppy.org/) (not popular enough?)
 
 Code tested: hello world app. I used [Gunicorn](https://gunicorn.org/). I benchmarked using [wrk](https://github.com/wg/wrk) with 2 threads and keeping 200 HTTP connections open. Some benchmarking results:
 
@@ -188,28 +188,28 @@ Since Go already handles requests, we're looking for a framework that provides a
 
 * Considered:
   * It's possible to do it with the standard Go library. An example [here](https://ryanmccue.ca/how-to-create-restful-api-golang-standard-library/)
-  * chi (lightweight http router. no external dependencies. the documentation isn't very good)
-  * Gin (popular, fast and minimalist. [route grouping feature](https://github.com/gin-gonic/gin#grouping-routes). good for a small project)
-  * Gorilla/mux (popular, simple. a lot of routing features, such as subrouters and regex matching)
-  * Gorilla/pat (more lightweight than Gorilla/mux?)
+  * [chi](https://github.com/go-chi/chi) (lightweight http router. no external dependencies. the documentation isn't very good)
+  * [Gin](https://gin-gonic.github.io/gin/) (popular, fast and minimalist. [route grouping feature](https://github.com/gin-gonic/gin#grouping-routes). good for a small project)
+  * [Gorilla/mux](http://www.gorillatoolkit.org/pkg/mux) (popular, simple. a lot of routing features, such as subrouters and regex matching)
+  * [Gorilla/pat](http://www.gorillatoolkit.org/pkg/pat) (more lightweight than Gorilla/mux?)
   * [fasthttprouter](https://github.com/buaazp/fasthttprouter) uses fasthttp
-  * Echo (minimalist. good documentation. a lot of dependencies)
+  * [Echo](https://echo.labstack.com/) (minimalist. good documentation. a lot of dependencies)
 
 * Too heavy for our needs in a microservice:
-  * Beego: (heavy and no community. Some scalabitity problems. Has ORM and "bee tool" for auto function calls when codebase changes. [Swagger is integrated in beego 1.3 -> auto generated api document](https://beego.me/blog/beego_api), though it doesn't seem very stable as can be seen in the comments)
-  * Buffalo
+  * [Beego](https://beego.me/): (heavy and no community. Some scalabitity problems. Has ORM and "bee tool" for auto function calls when codebase changes. [Swagger is integrated in beego 1.3 -> auto generated api document](https://beego.me/blog/beego_api), though it doesn't seem very stable as can be seen in the comments)
+  * [Buffalo](https://gobuffalo.io/)
   * [go-restful](https://github.com/emicklei/go-restful)
-  * Revel (heavy. strong community base. no native MongoDB support)
+  * [Revel](https://revel.github.io/) (heavy. strong community base. no native MongoDB support)
 
 * Not considered:
   * [bone](https://github.com/go-zoo/bone) because it is not popular enough
-  * goa (design-first framework -> the generation of a Swagger spec file is included) because it is not popular enough
-  * Goji (websocket support but doesn't add a lot to standard Go) because it is not popular enough
-  * Iris because of [these issues](http://www.florinpatan.ro/2016/10/why-you-should-not-use-iris-for-your-go.html)
-  * Martini (good router. about 40 times slower than Gin. in general, not a great performance) because it is slow and no longer maintained
+  * [goa](https://goa.design/) (design-first framework -> the generation of a Swagger spec file is included) because it is not popular enough
+  * [Goji](https://goji.io/) (websocket support but doesn't add a lot to standard Go) because it is not popular enough
+  * [Iris](https://iris-go.com/) because of [these issues](http://www.florinpatan.ro/2016/10/why-you-should-not-use-iris-for-your-go.html)
+  * [Martini](https://github.com/go-martini/martini) (good router. about 40 times slower than Gin. in general, not a great performance) because it is slow and no longer maintained
   * [Pat](https://github.com/bmizerany/pat) because it is no longer maintained
   * [routes](https://github.com/drone/routes) because it is deprecated
-  * Web.go (minimalist. tree routing makes it efficient. doesn't add a lot to standard Go) because it is not popular enough
+  * [Web.go](https://github.com/bnkamalesh/webgo) (minimalist. tree routing makes it efficient. doesn't add a lot to standard Go) because it is not popular enough
 
 Two benchmarks [here](https://github.com/julienschmidt/go-http-routing-benchmark) and [here](https://github.com/smallnest/go-web-framework-benchmark).
 
