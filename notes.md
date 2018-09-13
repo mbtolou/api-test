@@ -67,25 +67,15 @@ This document is intended as a comparison between several Python and Go framewor
 Code tested: hello world app. I used [Gunicorn](https://gunicorn.org/). I benchmarked using [wrk](https://github.com/wg/wrk) with 2 threads and keeping 200 HTTP connections open. Some benchmarking results:
 
 ```
-apistar :    58254 requests in   60s
-bottle  :    50772 requests in   60s
-falcon  :    46708 requests in   60s
-flask   :    25277 requests in   60s
-hug     :    48689 requests in   60s
-pyramid :    51101 requests in   60s
-quart   :    47949 requests in   60s
-sanic   :   143127 requests in   60s
-tornado :   139741 requests in   60s
-
-apistar :   659783 requests in  600s
-bottle  :   584356 requests in  600s
-falcon  :   606565 requests in  600s
-flask   :   367817 requests in  600s
-hug     :   498142 requests in  600s
-pyramid :   557527 requests in  600s
-quart   :   480928 requests in  600s
-sanic   :  1766532 requests in  600s
-tornado :  1476303 requests in  600s
+apistar :   1035 requests/sec
+bottle  :    910 requests/sec
+falcon  :    895 requests/sec
+flask   :    517 requests/sec
+hug     :    821 requests/sec
+pyramid :    890 requests/sec
+quart   :    800 requests/sec
+sanic   :   2665 requests/sec
+tornado :   2395 requests/sec
 ```
 
 Note: I used Gunicorn Quart workers for Quart, [Gunicorn Sanic workers](https://sanic.readthedocs.io/en/latest/sanic/deploying.html#running-via-gunicorn) for Sanic and Gunicorn Tornado workers for Tornado.
