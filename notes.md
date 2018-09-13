@@ -38,7 +38,7 @@ This document is intended as a comparison between several Python and Go framewor
 
 * Tested:
   * [API Star](https://docs.apistar.com/) (not popular enough?) - Python 3+
-  * [Bottle](https://bottlepy.org/) (non full stack framework. one-file approach: good for small projects) - Python 2.7 and 3.2+
+  * [Bottle](https://bottlepy.org/) (non full stack framework. one-file approach: good for small projects. [list of plugins](http://bottlepy.org/docs/0.12/plugins/index.html)) - Python 2.7 and 3.2+
   * [Falcon](https://falconframework.org/) (non full stack framework. made to build REST APIs) - Python 2 and 3.3+
   * [Flask](http://flask.pocoo.org/) (non full stack framework) - Python 2 and 3.3+
   * [hug](http://www.hug.rest/) (non full stack framework. built on-top of Falcon) - Python 3+
@@ -149,10 +149,10 @@ Some tools to help writing the OpenAPI spec:
 ### ORM libraries
 
 * API Star: supports Django ORM and SQLAlchemy. A library: [apistar-sqlalchemy](https://github.com/PeRDy/apistar-sqlalchemy). A SQLAlchemy discussion [here](https://github.com/encode/apistar/issues/546)
-* Bottle: SQLAlchemy. A plugin: [bottle-sqlalchemy](https://github.com/iurisilvio/bottle-sqlalchemy)
+* Bottle: SQLAlchemy with the [bottle-sqlalchemy](https://github.com/iurisilvio/bottle-sqlalchemy) plugin. SQLite with the [bottle-sqlite](http://bottlepy.org/docs/0.12/plugins/sqlite.html) plugin or the [Macaron](http://nobrin.github.io/macaron/webapp.html) plugin
 * Falcon: SQLAlchemy with [middleware](https://eshlox.net/2017/07/28/integrate-sqlalchemy-with-falcon-framework/)
 * Flask: SQLAlchemy
-* Pyramid: [SQLAlchemy](https://docs.pylonsproject.org/projects/pyramid-cookbook/en/latest/database/sqlalchemy.html)
+* Pyramid: [supports SQLAlchemy](https://docs.pylonsproject.org/projects/pyramid-cookbook/en/latest/database/sqlalchemy.html)
 * Quart: SQLAlchemy because [Quart supports some Flask extensions](https://pgjones.gitlab.io/quart/flask_extensions.html)
 * Sanic: SQLAlchemy. Some examples [here](https://github.com/seanpar203/sanic-starter) and [here](https://github.com/easydaniel/sanic-example)
 * Tornado: [aiopg](https://aiopg.readthedocs.io/en/stable/index.html), which can support SQLAlchemy
@@ -182,7 +182,7 @@ flask   :       61 requests in   60s
 
 ### Go frameworks
 
-Go comes with a net/http package that can handle requests. For better performance, we can use the [fasthttp](https://github.com/valyala/fasthttp) package (designed to be 10 times faster than net/http).
+Go comes with the [net/http package](https://golang.org/pkg/net/http/) that can handle requests. For better performance, we can use the [fasthttp](https://github.com/valyala/fasthttp) package (designed to be 10 times faster than net/http).
 
 Since Go already handles requests, we're looking for a framework that provides a routing system. A list of Web frameworks for Go ordered by popularity on GitHub can be found [here](https://github.com/mingrammer/go-web-framework-stars). A lit of Go routers can be found [here](https://github.com/avelino/awesome-go#routers).
 
@@ -222,11 +222,11 @@ Two benchmarks [here](https://github.com/julienschmidt/go-http-routing-benchmark
 
 ### ORM libraries
 
-A lit of ORM libraries can be found [here](https://github.com/avelino/awesome-go#orm).
+A lit of ORM libraries can be found [here](https://github.com/avelino/awesome-go#orm). Go comes with the [database/sql package](https://golang.org/pkg/database/sql/). The following are extensions on top of the database/sql package that make it more developer-friendly:
 
-* Go comes with the database/sql package
-* gorm
-* [sqlx](https://godoc.org/github.com/jmoiron/sqlx) and [dbr](https://github.com/gocraft/dbr) (extensions on top of the database/sql package)
+* [gorm](http://gorm.io/)
+* [sqlx](https://godoc.org/github.com/jmoiron/sqlx)
+* [dbr](https://github.com/gocraft/dbr)
 
 ### Testing options
 
